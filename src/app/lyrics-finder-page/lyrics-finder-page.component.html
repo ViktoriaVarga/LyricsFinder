@@ -1,1 +1,49 @@
-<p>lyrics-finder-page works!</p>
+<mat-card class="card">
+  <form [formGroup]="finderForm">
+    <mat-form-field appearance="fill">
+      <mat-label> Artist </mat-label>
+      <input
+        matInput
+        formControlName="artist"
+        required
+        autocomplete
+        maxlength="40"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label> Title </mat-label>
+      <input
+        matInput
+        formControlName="title"
+        required
+        autocomplete
+        maxlength="40"
+      />
+    </mat-form-field>
+    <button
+      (click)="onShowLyrics()"
+      mat-raised-button
+      [disabled]="finderForm.invalid"
+    >
+      Show Lyrics
+    </button>
+    <button
+      (click)="onClear()"
+      mat-raised-button
+      [disabled]="artist.invalid && title.invalid && !(lyrics$ | async) && !(errorMessage$ | async)"
+    >
+      Clear
+    </button>
+  </form>
+
+  <div class="lyrics" *ngIf="lyrics$ | async as lyrics">
+    <b>{{artist.value}} - {{title.value}}</b> 
+    <br>
+    <br>
+    {{ lyrics }}
+  </div>
+
+  <div class="error" *ngIf="errorMessage$ | async as error">
+    <p>An error occured while loading lyrics</p>
+  </div>
+</mat-card>

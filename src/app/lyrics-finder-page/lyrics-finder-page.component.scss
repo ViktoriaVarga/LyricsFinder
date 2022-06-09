@@ -1,0 +1,22 @@
+form {
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-evenly;
+
+  mat-form-field {
+    width: 40%;
+  }
+
+  button {
+    height: 50px;
+  }
+}
+
+.lyrics {
+  white-space: pre-wrap;
+  text-align: center;
+
+  b {
+    text-transform: capitalize;
+  }
+}
